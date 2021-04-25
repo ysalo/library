@@ -1,13 +1,9 @@
 import { useContext } from "react";
 import { Button, Classes, Dialog, Intent, FormGroup, InputGroup } from "@blueprintjs/core";
 import { CheckOutDialogContext } from "src/utils/context";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_LOANS } from "../graphql/Queries";
 
 export default function CheckOutDialog() {
     const [open, setOpen] = useContext(CheckOutDialogContext);
-    const { data } = useQuery(GET_ALL_LOANS);
-    console.log("books: ", data);
     return (
         <Dialog isOpen={open} enforceFocus={false} title="Позика Книги" onClose={() => setOpen(false)}>
             <div className={Classes.DIALOG_BODY}>
