@@ -1,7 +1,23 @@
 import { useContext, useState } from "react";
-import { Alignment, Button, Classes, Navbar, NavbarDivider, NavbarGroup, NavbarHeading, InputGroup } from "@blueprintjs/core";
-
-import { AddUserDialogContext, CheckOutDialogContext, DarkThemeContext, SearchContext } from "../utils/context";
+import {
+    Alignment,
+    Button,
+    Classes,
+    Navbar,
+    NavbarDivider,
+    NavbarGroup,
+    NavbarHeading,
+    InputGroup,
+    Menu,
+    MenuItem
+} from "@blueprintjs/core";
+import { ContextMenu2 } from "@blueprintjs/popover2";
+import {
+    AddUserDialogContext,
+    CheckOutDialogContext,
+    DarkThemeContext,
+    SearchContext
+} from "../utils/context";
 import { useHistory } from "react-router-dom";
 import HelpDrawer from "./HelpDrawer";
 
@@ -21,58 +37,83 @@ export default function NavBar({ toggleTheme }: Props) {
                 <NavbarGroup align={Alignment.LEFT} className="left-group">
                     <NavbarHeading>Бібліотека</NavbarHeading>
                     <NavbarDivider />
-                    <Button
-                        className={Classes.MINIMAL}
-                        icon="book"
-                        text="Книги"
-                        active={activeIndex === 0}
-                        onClick={() => {
-                            setActiveIndex(0);
-                            history.push("/");
-                        }}
-                    />
+                    <ContextMenu2
+                        content={
+                            <Menu>
+                                <MenuItem
+                                    key="add-book"
+                                    icon="new-layer"
+                                    text="Додати Книгу"
+                                    onClick={() =>
+                                        console.warn(
+                                            "add book clicked. functionality not implemented yet."
+                                        )
+                                    }
+                                />
+                            </Menu>
+                        }
+                    >
+                        <Button
+                            className={Classes.MINIMAL}
+                            icon="book"
+                            text="Книги"
+                            active={activeIndex === 0}
+                            onClick={() => {
+                                setActiveIndex(0);
+                                history.push("/");
+                            }}
+                        />
+                    </ContextMenu2>
                     <NavbarDivider />
-                    <Button
-                        className={Classes.MINIMAL}
-                        icon="person"
-                        text="Користувачі"
-                        active={activeIndex === 2}
-                        onClick={() => {
-                            setActiveIndex(2);
-                            history.push("/users");
-                        }}
-                    />
-
-                    <Button
-                        minimal
-                        icon="plus"
-                        intent="primary"
-                        onClick={() => {
-                            setAddUserDialogOpen(true);
-                        }}
-                    />
+                    <ContextMenu2
+                        content={
+                            <Menu>
+                                <MenuItem
+                                    key="add-user"
+                                    icon="new-person"
+                                    text="Додати Користувача"
+                                    onClick={() => setAddUserDialogOpen(true)}
+                                />
+                            </Menu>
+                        }
+                    >
+                        <Button
+                            className={Classes.MINIMAL}
+                            icon="person"
+                            text="Користувачі"
+                            active={activeIndex === 2}
+                            onClick={() => {
+                                setActiveIndex(2);
+                                history.push("/users");
+                            }}
+                        />
+                    </ContextMenu2>
 
                     <NavbarDivider />
 
-                    <Button
-                        className={Classes.MINIMAL}
-                        icon="shopping-cart"
-                        text="Позики"
-                        active={activeIndex === 1}
-                        onClick={() => {
-                            setActiveIndex(1);
-                            history.push("/checkout");
-                        }}
-                    />
-
-                    <Button
-                        minimal
-                        icon="plus"
-                        intent="primary"
-                        onClick={() => {
-                            setCheckoutDialogOpen(true);
-                        }}
-                    />
+                    <ContextMenu2
+                        content={
+                            <Menu>
+                                <MenuItem
+                                    key="add-loan"
+                                    icon="add"
+                                    text="Додати Позику"
+                                    onClick={() => setCheckoutDialogOpen(true)}
+                                />
+                            </Menu>
+                        }
+                    >
+                        <Button
+                            className={Classes.MINIMAL}
+                            icon="shopping-cart"
+                            text="Позики"
+                            active={activeIndex === 1}
+                            onClick={() => {
+                                setActiveIndex(1);
+                                history.push("/checkout");
+                            }}
+                        />
+                    </ContextMenu2>
 
                     <NavbarDivider />
                 </NavbarGroup>
@@ -81,11 +122,11 @@ export default function NavBar({ toggleTheme }: Props) {
                         className="search-input"
                         type="search"
                         value={search}
-                        leftIcon="search"
-                        fill={true}
                         onChange={e => {
                             setSearch(e.currentTarget.value);
                         }}
+                        leftIcon="search"
+                        fill={true}
                         placeholder="Пошук..."
                     />
                 </NavbarGroup>

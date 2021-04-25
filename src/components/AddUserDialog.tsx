@@ -18,7 +18,7 @@ export default function AddUserDialog() {
         setLastName("");
         setPhoneNumber("");
         setEmail("");
-    }, []);
+    }, [setOpen]);
 
     return (
         <Dialog isOpen={open} enforceFocus={false} title="Додати Користувача" onClose={handleClose}>
