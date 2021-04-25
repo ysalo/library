@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Alignment, Button, Classes, Navbar, NavbarDivider, NavbarGroup, NavbarHeading, InputGroup } from "@blueprintjs/core";
 
-import { CheckOutDialogContext, DarkThemeContext } from "../utils/context";
+import { AddUserDialogContext, CheckOutDialogContext, DarkThemeContext, SearchContext } from "../utils/context";
 import { useHistory } from "react-router-dom";
 import HelpDrawer from "./HelpDrawer";
 
@@ -12,6 +12,8 @@ export default function NavBar({ toggleTheme }: Props) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [openHelp, setOpenHelp] = useState(false);
     const [, setCheckoutDialogOpen] = useContext(CheckOutDialogContext);
+    const [, setAddUserDialogOpen] = useContext(AddUserDialogContext);
+    const [search, setSearch] = useContext(SearchContext);
     const history = useHistory();
     return (
         <div className="navbar-container">
@@ -30,6 +32,28 @@ export default function NavBar({ toggleTheme }: Props) {
                         }}
                     />
                     <NavbarDivider />
+                    <Button
+                        className={Classes.MINIMAL}
+                        icon="person"
+                        text="Користувачі"
+                        active={activeIndex === 2}
+                        onClick={() => {
+                            setActiveIndex(2);
+                            history.push("/users");
+                        }}
+                    />
+
+                    <Button
+                        minimal
+                        icon="plus"
+                        intent="primary"
+                        onClick={() => {
+                            setAddUserDialogOpen(true);
+                        }}
+                    />
+
+                    <NavbarDivider />
+
                     <Button
                         className={Classes.MINIMAL}
                         icon="shopping-cart"
@@ -56,12 +80,12 @@ export default function NavBar({ toggleTheme }: Props) {
                     <InputGroup
                         className="search-input"
                         type="search"
-                        value={""}
+                        value={search}
                         leftIcon="search"
                         fill={true}
-                        // onChange={e => {
-                        //     setSearch(e.currentTarget.value);
-                        // }}
+                        onChange={e => {
+                            setSearch(e.currentTarget.value);
+                        }}
                         placeholder="Пошук..."
                     />
                 </NavbarGroup>
@@ -75,24 +99,4 @@ export default function NavBar({ toggleTheme }: Props) {
             <HelpDrawer open={openHelp} setOpen={setOpenHelp} />
         </div>
     );
-}
-
-{
-    /* <Button className={Classes.MINIMAL} icon="settings" onClick={() => setOpen(!open)} /> */
-}
-{
-    /* <SettingDrawer open={open} setOpen={setOpen} /> */
-}
-
-{
-    /* <Button
-minimal
-icon="history"
-text="Runs"
-active={activeIndex === 1}
-onClick={() => {
-    setActiveIndex(1);
-    history.push("/runs");
-}}
-/> */
 }

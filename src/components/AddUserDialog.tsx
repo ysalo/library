@@ -1,18 +1,24 @@
 import { useContext } from "react";
 import { Button, Classes, Dialog, Intent, FormGroup, InputGroup } from "@blueprintjs/core";
-import { CheckOutDialogContext } from "src/utils/context";
+import { AddUserDialogContext } from "src/utils/context";
 
-export default function CheckOutDialog() {
-    const [open, setOpen] = useContext(CheckOutDialogContext);
+export default function AddUserDialog() {
+    const [open, setOpen] = useContext(AddUserDialogContext);
     return (
-        <Dialog isOpen={open} enforceFocus={false} title="Позика Книги" onClose={() => setOpen(false)}>
+        <Dialog isOpen={open} enforceFocus={false} title="Додати Користувача" onClose={() => setOpen(false)}>
             <div className={Classes.DIALOG_BODY}>
                 <div className="form-group">
+                    <FormGroup label="Ім'я" labelFor="text-input">
+                        <InputGroup id="firstname" placeholder="Ім'я" />
+                    </FormGroup>
+                    <FormGroup label="Прізвище" labelFor="text-input">
+                        <InputGroup id="lastname" placeholder="Прізвище" />
+                    </FormGroup>
                     <FormGroup label="Номер Телефону" labelFor="text-input">
                         <InputGroup id="phone-number" placeholder="(XXX)-XXX-XXXX" />
                     </FormGroup>
-                    <FormGroup label="Штрих-код" labelFor="text-input">
-                        <InputGroup id="barcode" placeholder="XXXXXXXX" />
+                    <FormGroup label="Імейл" labelFor="text-input">
+                        <InputGroup id="email" placeholder="username@example.com" />
                     </FormGroup>
                 </div>
             </div>
