@@ -16,7 +16,7 @@ export default function HelpDrawer({ open, setOpen }: Props) {
 
             <div className={Classes.DRAWER_FOOTER}>
                 <div className="footer-info">
-                    <div className="header">First Ukranian Baptist Church of Seattle</div>
+                    <div className="header">Перша Українська Баптистська Церква Міста Сіетл</div>
                 </div>
             </div>
         </Drawer>

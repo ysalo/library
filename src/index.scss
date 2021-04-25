@@ -12,6 +12,8 @@ html {
     body {
         font-family: sans-serif;
         font-size: 16px;
+        //background-image: url("mountains.jpg");
+        background-size: cover;
 
         &.bp3-dark {
             background-color: #30404d;
@@ -42,7 +44,6 @@ html {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
     .bp3-navbar {
         padding-right: 0;
         display: flex;
@@ -63,7 +64,7 @@ html {
         }
     }
 
-    .template-add {
+    .checkout-add {
         padding-left: 0.15rem;
     }
 }

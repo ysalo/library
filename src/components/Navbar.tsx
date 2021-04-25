@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Alignment, Button, Classes, Navbar, NavbarDivider, NavbarGroup, NavbarHeading, InputGroup } from "@blueprintjs/core";
 
-import { DarkThemeContext } from "../utils/context";
+import { CheckOutDialogContext, DarkThemeContext } from "../utils/context";
 import { useHistory } from "react-router-dom";
 import HelpDrawer from "./HelpDrawer";
 
@@ -11,6 +11,7 @@ export default function NavBar({ toggleTheme }: Props) {
     const dark = useContext(DarkThemeContext);
     const [activeIndex, setActiveIndex] = useState(0);
     const [openHelp, setOpenHelp] = useState(false);
+    const [, setCheckoutDialogOpen] = useContext(CheckOutDialogContext);
     const history = useHistory();
     return (
         <div className="navbar-container">
@@ -39,6 +40,16 @@ export default function NavBar({ toggleTheme }: Props) {
                             history.push("/checkout");
                         }}
                     />
+
+                    <Button
+                        minimal
+                        icon="plus"
+                        intent="primary"
+                        onClick={() => {
+                            setCheckoutDialogOpen(true);
+                        }}
+                    />
+
                     <NavbarDivider />
                 </NavbarGroup>
                 <NavbarGroup align={Alignment.CENTER} className="center-group">
