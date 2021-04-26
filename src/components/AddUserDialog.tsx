@@ -35,7 +35,6 @@ export default function AddUserDialog() {
             }
         })
             .then(res => {
-                console.log("res: ", res);
                 AddMemberToaster.show({
                     message: `Успішно додано користувача.`,
                     intent: Intent.SUCCESS

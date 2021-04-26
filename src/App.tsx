@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HashRouter, Route } from "react-router-dom";
 import { FocusStyleManager } from "@blueprintjs/core";
 import { useLocalBoolState } from "./hooks/useLocalBoolState";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, NormalizedCacheObject } from "@apollo/client";
 
 import Navbar from "./components/Navbar";
 import BooksPage from "./pages/BooksPage";
@@ -22,14 +22,17 @@ import MembersPage from "./pages/MembersPage";
 FocusStyleManager.onlyShowFocusOnTabs();
 
 export default function App() {
-    const client = new ApolloClient({
-        uri: "http://localhost:4000/graphql",
-        cache: new InMemoryCache()
-    });
     const [dark, setDark] = useLocalBoolState("dark-mode", true);
+    const [client] = useState<ApolloClient<NormalizedCacheObject>>(
+        new ApolloClient({
+            uri: "http://localhost:4000/graphql",
+            cache: new InMemoryCache()
+        })
+    );
     const [checkoutDialogOpen, setCheckoutDialogOpen] = useState(false);
     const [addUserDialogOpen, setAddUserDialogOpen] = useState(false);
     const [search, setSearch] = useState("");
+
     useEffect(() => {
         if (dark) {
             document.body.classList.add("bp3-dark");
@@ -41,26 +44,26 @@ export default function App() {
     return (
         <div id="app" className={dark ? "bp3-dark" : ""}>
             <ApolloProvider client={client}>
-                <SearchContext.Provider value={[search, setSearch]}>
-                    <DarkThemeContext.Provider value={dark}>
-                        <CheckOutDialogContext.Provider
-                            value={[checkoutDialogOpen, setCheckoutDialogOpen]}
+                <DarkThemeContext.Provider value={dark}>
+                    <CheckOutDialogContext.Provider
+                        value={[checkoutDialogOpen, setCheckoutDialogOpen]}
+                    >
+                        <AddUserDialogContext.Provider
+                            value={[addUserDialogOpen, setAddUserDialogOpen]}
                         >
-                            <AddUserDialogContext.Provider
-                                value={[addUserDialogOpen, setAddUserDialogOpen]}
-                            >
+                            <SearchContext.Provider value={[search, setSearch]}>
                                 <HashRouter>
                                     <Navbar toggleTheme={() => setDark(d => !d)} />
                                     <CheckOutDialog />
                                     <AddUserDialog />
                                     <Route exact path="/" component={BooksPage} />
-                                    <Route exact path="/checkout" component={LoansPage} />
-                                    <Route exact path="/members" component={MembersPage} />
+                                    <Route path="/checkout" component={LoansPage} />
+                                    <Route path="/members" component={MembersPage} />
                                 </HashRouter>
-                            </AddUserDialogContext.Provider>
-                        </CheckOutDialogContext.Provider>
-                    </DarkThemeContext.Provider>
-                </SearchContext.Provider>
+                            </SearchContext.Provider>
+                        </AddUserDialogContext.Provider>
+                    </CheckOutDialogContext.Provider>
+                </DarkThemeContext.Provider>
             </ApolloProvider>
         </div>
     );

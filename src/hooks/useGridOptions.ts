@@ -12,11 +12,10 @@ import { useStoredColumns } from "./useStoredColumns";
 
 const autoSizeColumns = ({ columnApi }: { api: GridApi; columnApi: ColumnApi }) => {
     const ids = columnApi.getAllColumns();
-    console.log("ids: ", ids);
+
     // don't autosize last column
     if (ids) {
         ids?.pop();
-        console.log("here");
         columnApi.autoSizeColumns(ids);
     }
 };
@@ -34,7 +33,7 @@ export function useGridOptions(
     const gridApiRef = useRef<GridApi>();
 
     const [onColumnChanged] = useStoredColumns({
-        tableName: "templates",
+        tableName: "members",
         defaultColumnState
     });
 
@@ -85,8 +84,6 @@ export function useGridOptions(
                     dateColumn: { filter: "agDateColumnFilter" }
                 },
 
-                getRowNodeId: (data: { id: string }) => data.id,
-                getRowClass: params => params.data.id,
                 // rowClassRules: {
                 //     "alarm-expired": (params) => {
                 //         const expiration = params.data.expiration;

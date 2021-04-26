@@ -81,9 +81,9 @@ export default function NavBar({ toggleTheme }: Props) {
                             className={Classes.MINIMAL}
                             icon="person"
                             text="Користувачі"
-                            active={activeIndex === 2}
+                            active={activeIndex === 1}
                             onClick={() => {
-                                setActiveIndex(2);
+                                setActiveIndex(1);
                                 history.push("/members");
                             }}
                         />
@@ -107,9 +107,9 @@ export default function NavBar({ toggleTheme }: Props) {
                             className={Classes.MINIMAL}
                             icon="shopping-cart"
                             text="Позики"
-                            active={activeIndex === 1}
+                            active={activeIndex === 2}
                             onClick={() => {
-                                setActiveIndex(1);
+                                setActiveIndex(2);
                                 history.push("/checkout");
                             }}
                         />
