@@ -84,7 +84,7 @@ export default function NavBar({ toggleTheme }: Props) {
                             active={activeIndex === 2}
                             onClick={() => {
                                 setActiveIndex(2);
-                                history.push("/users");
+                                history.push("/members");
                             }}
                         />
                     </ContextMenu2>

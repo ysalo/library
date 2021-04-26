@@ -1,0 +1,33 @@
+#grid {
+    height: 100%;
+
+    .ag {
+        width: 100%;
+        height: 100%;
+
+        font-size: medium;
+
+        .ag-cell {
+            &:focus {
+                border-color: transparent !important;
+                outline: none;
+            }
+        }
+
+        .ag-center-cols-viewport {
+            overflow-x: hidden;
+        }
+
+        .ag-row {
+            &:hover {
+                cursor: pointer;
+                // background-color: $pt-text-selection-color;
+            }
+
+            // &:focus {
+            //     background-color: $pt-text-selection-color;
+            //     ;
+            // }
+        }
+    }
+}

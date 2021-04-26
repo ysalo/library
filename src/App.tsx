@@ -8,11 +8,16 @@ import Navbar from "./components/Navbar";
 import BooksPage from "./pages/BooksPage";
 import LoansPage from "./pages/LoansPage";
 
-import { AddUserDialogContext, CheckOutDialogContext, DarkThemeContext, SearchContext } from "./utils/context";
+import {
+    AddUserDialogContext,
+    CheckOutDialogContext,
+    DarkThemeContext,
+    SearchContext
+} from "./utils/context";
 
 import CheckOutDialog from "./components/CheckoutDialog";
-import UsersPage from "./pages/UsersPage";
 import AddUserDialog from "./components/AddUserDialog";
+import MembersPage from "./pages/MembersPage";
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
@@ -38,15 +43,19 @@ export default function App() {
             <ApolloProvider client={client}>
                 <SearchContext.Provider value={[search, setSearch]}>
                     <DarkThemeContext.Provider value={dark}>
-                        <CheckOutDialogContext.Provider value={[checkoutDialogOpen, setCheckoutDialogOpen]}>
-                            <AddUserDialogContext.Provider value={[addUserDialogOpen, setAddUserDialogOpen]}>
+                        <CheckOutDialogContext.Provider
+                            value={[checkoutDialogOpen, setCheckoutDialogOpen]}
+                        >
+                            <AddUserDialogContext.Provider
+                                value={[addUserDialogOpen, setAddUserDialogOpen]}
+                            >
                                 <HashRouter>
                                     <Navbar toggleTheme={() => setDark(d => !d)} />
                                     <CheckOutDialog />
                                     <AddUserDialog />
                                     <Route exact path="/" component={BooksPage} />
                                     <Route exact path="/checkout" component={LoansPage} />
-                                    <Route exact path="/users" component={UsersPage} />
+                                    <Route exact path="/members" component={MembersPage} />
                                 </HashRouter>
                             </AddUserDialogContext.Provider>
                         </CheckOutDialogContext.Provider>
