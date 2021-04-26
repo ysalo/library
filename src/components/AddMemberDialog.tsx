@@ -5,8 +5,9 @@ import { validatePhoneNumber, validateEmail } from "src/utils/utils";
 import { useMutation } from "@apollo/client";
 import { CREATE_MEMBER } from "src/graphql/Mutations";
 import { AddMemberToaster } from "./Toaster";
+import { GET_ALL_MEMBERS } from "src/graphql/Queries";
 
-export default function AddUserDialog() {
+export default function AddMemberDialog() {
     const [open, setOpen] = useContext(AddUserDialogContext);
     const [firstName, setFirstName] = useState("");
     const [middleName, setMiddleName] = useState("");
@@ -32,7 +33,12 @@ export default function AddUserDialog() {
                 Middle_Name: middleName,
                 Email: email !== "" ? email : null,
                 Phone_Number: phoneNumber !== "" ? phoneNumber : null
-            }
+            },
+            refetchQueries: [
+                {
+                    query: GET_ALL_MEMBERS
+                }
+            ]
         })
             .then(res => {
                 AddMemberToaster.show({

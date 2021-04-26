@@ -16,7 +16,7 @@ import {
 } from "./utils/context";
 
 import CheckOutDialog from "./components/CheckoutDialog";
-import AddUserDialog from "./components/AddUserDialog";
+import AddMemberDialog from "./components/AddMemberDialog";
 import MembersPage from "./pages/MembersPage";
 
 FocusStyleManager.onlyShowFocusOnTabs();
@@ -55,7 +55,7 @@ export default function App() {
                                 <HashRouter>
                                     <Navbar toggleTheme={() => setDark(d => !d)} />
                                     <CheckOutDialog />
-                                    <AddUserDialog />
+                                    <AddMemberDialog />
                                     <Route exact path="/" component={BooksPage} />
                                     <Route path="/checkout" component={LoansPage} />
                                     <Route path="/members" component={MembersPage} />
