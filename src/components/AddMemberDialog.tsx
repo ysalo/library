@@ -7,6 +7,8 @@ import { CREATE_MEMBER } from "src/graphql/Mutations";
 import { AddMemberToaster } from "./Toaster";
 import { GET_ALL_MEMBERS } from "src/graphql/Queries";
 
+const toastTimeoutMS = 15000;
+
 export default function AddMemberDialog() {
     const [open, setOpen] = useContext(AddUserDialogContext);
     const [firstName, setFirstName] = useState("");
@@ -43,13 +45,15 @@ export default function AddMemberDialog() {
             .then(res => {
                 AddMemberToaster.show({
                     message: `Успішно додано користувача.`,
-                    intent: Intent.SUCCESS
+                    intent: Intent.SUCCESS,
+                    timeout: toastTimeoutMS
                 });
             })
             .catch(err => {
                 AddMemberToaster.show({
                     message: `Не вдалося додати користувача! Зв’яжіться з адміністратором.`,
-                    intent: Intent.DANGER
+                    intent: Intent.DANGER,
+                    timeout: toastTimeoutMS
                 });
             });
     }, [createUser, email, firstName, lastName, middleName, phoneNumber]);
