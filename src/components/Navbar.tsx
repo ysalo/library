@@ -16,6 +16,7 @@ import {
     AddUserDialogContext,
     CheckOutDialogContext,
     DarkThemeContext,
+    ReturnDialogContext,
     SearchContext
 } from "../utils/context";
 import { useHistory } from "react-router-dom";
@@ -29,6 +30,7 @@ export default function NavBar({ toggleTheme }: Props) {
     const [openHelp, setOpenHelp] = useState(false);
     const [, setCheckoutDialogOpen] = useContext(CheckOutDialogContext);
     const [, setAddUserDialogOpen] = useContext(AddUserDialogContext);
+    const [, setReturnDialogOpen] = useContext(ReturnDialogContext);
     const [search, setSearch] = useContext(SearchContext);
     const history = useHistory();
     return (
@@ -99,6 +101,12 @@ export default function NavBar({ toggleTheme }: Props) {
                                     icon="add"
                                     text="Додати Позику"
                                     onClick={() => setCheckoutDialogOpen(true)}
+                                />
+                                <MenuItem
+                                    key="return-loan"
+                                    icon="remove"
+                                    text="Повернути Позику"
+                                    onClick={() => setReturnDialogOpen(true)}
                                 />
                             </Menu>
                         }

@@ -9,3 +9,8 @@ export const AddLoanToaster = Toaster.create({
     className: "add-loan-toaster",
     position: Position.TOP
 });
+
+export const ReturnLoanToaster = Toaster.create({
+    className: "return-loan-toaster",
+    position: Position.TOP
+});

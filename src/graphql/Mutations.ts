@@ -28,3 +28,12 @@ export const CREATE_LOAN = gql`
         }
     }
 `;
+
+export const RETURN_LOAN = gql`
+    mutation($Barcode: String!) {
+        returnLoan(Barcode: $Barcode) {
+            Barcode
+            Due
+        }
+    }
+`;

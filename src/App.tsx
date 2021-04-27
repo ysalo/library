@@ -12,12 +12,14 @@ import {
     AddUserDialogContext,
     CheckOutDialogContext,
     DarkThemeContext,
+    ReturnDialogContext,
     SearchContext
 } from "./utils/context";
 
 import CheckOutDialog from "./components/CheckoutDialog";
 import AddMemberDialog from "./components/AddMemberDialog";
 import MembersPage from "./pages/MembersPage";
+import ReturnDialog from "./components/ReturnDialog";
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
@@ -31,6 +33,7 @@ export default function App() {
     );
     const [checkoutDialogOpen, setCheckoutDialogOpen] = useState(false);
     const [addUserDialogOpen, setAddUserDialogOpen] = useState(false);
+    const [returnDialogOpen, setReturnDialogOpen] = useState(false);
     const [search, setSearch] = useState("");
 
     useEffect(() => {
@@ -51,16 +54,21 @@ export default function App() {
                         <AddUserDialogContext.Provider
                             value={[addUserDialogOpen, setAddUserDialogOpen]}
                         >
-                            <SearchContext.Provider value={[search, setSearch]}>
-                                <HashRouter>
-                                    <Navbar toggleTheme={() => setDark(d => !d)} />
-                                    <CheckOutDialog />
-                                    <AddMemberDialog />
-                                    <Route exact path="/" component={BooksPage} />
-                                    <Route path="/checkout" component={LoansPage} />
-                                    <Route path="/members" component={MembersPage} />
-                                </HashRouter>
-                            </SearchContext.Provider>
+                            <ReturnDialogContext.Provider
+                                value={[returnDialogOpen, setReturnDialogOpen]}
+                            >
+                                <SearchContext.Provider value={[search, setSearch]}>
+                                    <HashRouter>
+                                        <Navbar toggleTheme={() => setDark(d => !d)} />
+                                        <CheckOutDialog />
+                                        <AddMemberDialog />
+                                        <ReturnDialog />
+                                        <Route exact path="/" component={BooksPage} />
+                                        <Route path="/checkout" component={LoansPage} />
+                                        <Route path="/members" component={MembersPage} />
+                                    </HashRouter>
+                                </SearchContext.Provider>
+                            </ReturnDialogContext.Provider>
                         </AddUserDialogContext.Provider>
                     </CheckOutDialogContext.Provider>
                 </DarkThemeContext.Provider>
