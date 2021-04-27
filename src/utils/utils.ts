@@ -7,3 +7,15 @@ export const validateEmail = (email: string) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 };
+
+export const validateBarcode = (barcode: string) => {
+    const re = /^[0-9]+$/;
+    return re.test(barcode) && barcode.length === 8;
+};
+
+export const convertFromEpochTime = (epoch: string | null) => {
+    if (!epoch) {
+        return null;
+    }
+    return new Date(+epoch).toLocaleDateString();
+};

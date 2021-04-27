@@ -20,3 +20,11 @@ export const CREATE_MEMBER = gql`
         }
     }
 `;
+
+export const CREATE_LOAN = gql`
+    mutation($Member_Id: Int!, $Barcode: String!) {
+        createLoan(Member_Id: $Member_Id, Barcode: $Barcode) {
+            Due
+        }
+    }
+`;

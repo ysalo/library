@@ -7,6 +7,7 @@ import "./Grid.scss";
 import { DarkThemeContext, SearchContext } from "src/utils/context";
 
 import { useLoans } from "src/hooks/useLoans";
+import { convertFromEpochTime } from "src/utils/utils";
 
 export default function LoansPage() {
     const [gridOptions, gridApi] = useGridOptions(columnDefs, defaultColumnState);
@@ -14,7 +15,7 @@ export default function LoansPage() {
     const [search] = useContext(SearchContext);
 
     const [data, loading] = useLoans();
-    console.log("data: ", data);
+
     useEffect(() => {
         if (gridOptions) {
             gridOptions.getRowNodeId = (data: { Loan_Id: string }) => data.Loan_Id;
@@ -105,11 +106,3 @@ export const defaultColumnState: ColumnState[] = [
         hide: false
     }
 ];
-
-const convertFromEpochTime = (epoch: string | null) => {
-    if (!epoch) {
-        console.log("null");
-        return null;
-    }
-    return new Date(+epoch).toLocaleDateString();
-};

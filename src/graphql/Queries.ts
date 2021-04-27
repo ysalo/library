@@ -50,3 +50,16 @@ export const GET_ALL_ITEMS = gql`
         }
     }
 `;
+
+// export const GET_MEMBER_BY_EMAIL = gql`
+//     query {
+//         getMemberByEmail {
+//             Member_Id
+//             Last_Name
+//             Middle_Name
+//             First_Name
+//             Email
+//             Phone_Number
+//         }
+//     }
+// `;
