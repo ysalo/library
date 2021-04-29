@@ -40,6 +40,7 @@ export default function NavBar({ toggleTheme }: Props) {
                     <NavbarHeading>Бібліотека</NavbarHeading>
                     <NavbarDivider />
                     <ContextMenu2
+                    transitionDuration
                         content={
                             <Menu>
                                 <MenuItem
@@ -68,6 +69,7 @@ export default function NavBar({ toggleTheme }: Props) {
                     </ContextMenu2>
                     <NavbarDivider />
                     <ContextMenu2
+                    transitionDuration
                         content={
                             <Menu>
                                 <MenuItem
@@ -94,6 +96,7 @@ export default function NavBar({ toggleTheme }: Props) {
                     <NavbarDivider />
 
                     <ContextMenu2
+                    transitionDuration
                         content={
                             <Menu>
                                 <MenuItem

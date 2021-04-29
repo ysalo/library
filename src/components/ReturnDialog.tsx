@@ -88,7 +88,7 @@ export default function ReturnDialog() {
                         onClick={handleSubmit}
                         loading={loading}
                     />
-                    <Button text="Відмінити" onClick={handleClose} />
+                    <Button text="Закрити" onClick={handleClose} />
                 </div>
             </div>
         </Dialog>
