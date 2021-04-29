@@ -30,6 +30,7 @@ export default function CheckOutDialog() {
         setOpen(false);
         setPhoneNumber("");
         setEmail("");
+        setBarcode("");
     }, [setOpen]);
 
     const handleSubmit = useCallback(() => {
