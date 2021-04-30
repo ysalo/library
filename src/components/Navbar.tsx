@@ -11,7 +11,7 @@ import {
     Menu,
     MenuItem
 } from "@blueprintjs/core";
-import { ContextMenu2 } from "@blueprintjs/popover2";
+import { ContextMenu2, Popover2 } from "@blueprintjs/popover2";
 import {
     AddUserDialogContext,
     CheckOutDialogContext,
@@ -33,14 +33,17 @@ export default function NavBar({ toggleTheme }: Props) {
     const [, setReturnDialogOpen] = useContext(ReturnDialogContext);
     const [search, setSearch] = useContext(SearchContext);
     const history = useHistory();
+
     return (
         <div className="navbar-container">
             <Navbar className={"bp3-navbar"} fixedToTop>
                 <NavbarGroup align={Alignment.LEFT} className="left-group">
                     <NavbarHeading>Бібліотека</NavbarHeading>
                     <NavbarDivider />
-                    <ContextMenu2
-                    transitionDuration
+                    <Popover2
+                        minimal
+                        interactionKind={"hover"}
+                        position="bottom-left"
                         content={
                             <Menu>
                                 <MenuItem
@@ -66,10 +69,12 @@ export default function NavBar({ toggleTheme }: Props) {
                                 history.push("/");
                             }}
                         />
-                    </ContextMenu2>
+                    </Popover2>
                     <NavbarDivider />
-                    <ContextMenu2
-                    transitionDuration
+                    <Popover2
+                        minimal
+                        interactionKind={"hover"}
+                        position="bottom-left"
                         content={
                             <Menu>
                                 <MenuItem
@@ -91,12 +96,14 @@ export default function NavBar({ toggleTheme }: Props) {
                                 history.push("/members");
                             }}
                         />
-                    </ContextMenu2>
+                    </Popover2>
 
                     <NavbarDivider />
 
-                    <ContextMenu2
-                    transitionDuration
+                    <Popover2
+                        minimal
+                        interactionKind={"hover"}
+                        position="bottom-left"
                         content={
                             <Menu>
                                 <MenuItem
@@ -124,7 +131,7 @@ export default function NavBar({ toggleTheme }: Props) {
                                 history.push("/checkout");
                             }}
                         />
-                    </ContextMenu2>
+                    </Popover2>
 
                     <NavbarDivider />
                 </NavbarGroup>
