@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
     Alignment,
     Button,
@@ -9,7 +9,10 @@ import {
     NavbarHeading,
     InputGroup,
     Menu,
-    MenuItem
+    MenuItem,
+    Icon,
+    MenuDivider,
+    Intent
 } from "@blueprintjs/core";
 import { ContextMenu2, Popover2 } from "@blueprintjs/popover2";
 import {
@@ -47,6 +50,16 @@ export default function NavBar({ toggleTheme }: Props) {
                         content={
                             <Menu>
                                 <MenuItem
+                                    key="books"
+                                    icon="book"
+                                    text="Книги"
+                                    onClick={() => {
+                                        setActiveIndex(0);
+                                        history.push("/");
+                                    }}
+                                />
+                                <MenuDivider />
+                                <MenuItem
                                     key="add-book"
                                     icon="new-layer"
                                     text="Додати Книгу"
@@ -59,15 +72,10 @@ export default function NavBar({ toggleTheme }: Props) {
                             </Menu>
                         }
                     >
-                        <Button
+                        <Icon
                             className={Classes.MINIMAL}
                             icon="book"
-                            text="Книги"
-                            active={activeIndex === 0}
-                            onClick={() => {
-                                setActiveIndex(0);
-                                history.push("/");
-                            }}
+                            intent={activeIndex === 0 ? Intent.PRIMARY : Intent.NONE}
                         />
                     </Popover2>
                     <NavbarDivider />
@@ -78,6 +86,16 @@ export default function NavBar({ toggleTheme }: Props) {
                         content={
                             <Menu>
                                 <MenuItem
+                                    key="members"
+                                    icon="people"
+                                    text="Користувачі"
+                                    onClick={() => {
+                                        setActiveIndex(1);
+                                        history.push("/members");
+                                    }}
+                                />
+                                <MenuDivider />
+                                <MenuItem
                                     key="add-user"
                                     icon="new-person"
                                     text="Додати Користувача"
@@ -86,15 +104,10 @@ export default function NavBar({ toggleTheme }: Props) {
                             </Menu>
                         }
                     >
-                        <Button
+                        <Icon
                             className={Classes.MINIMAL}
                             icon="person"
-                            text="Користувачі"
-                            active={activeIndex === 1}
-                            onClick={() => {
-                                setActiveIndex(1);
-                                history.push("/members");
-                            }}
+                            intent={activeIndex === 1 ? Intent.PRIMARY : Intent.NONE}
                         />
                     </Popover2>
 
@@ -106,6 +119,16 @@ export default function NavBar({ toggleTheme }: Props) {
                         position="bottom-left"
                         content={
                             <Menu>
+                                <MenuItem
+                                    key="loans"
+                                    icon="shopping-cart"
+                                    text="Позики"
+                                    onClick={() => {
+                                        history.push("/checkout");
+                                        setActiveIndex(2);
+                                    }}
+                                />
+                                <MenuDivider />
                                 <MenuItem
                                     key="add-loan"
                                     icon="add"
@@ -121,15 +144,10 @@ export default function NavBar({ toggleTheme }: Props) {
                             </Menu>
                         }
                     >
-                        <Button
+                        <Icon
                             className={Classes.MINIMAL}
                             icon="shopping-cart"
-                            text="Позики"
-                            active={activeIndex === 2}
-                            onClick={() => {
-                                setActiveIndex(2);
-                                history.push("/checkout");
-                            }}
+                            intent={activeIndex === 2 ? Intent.PRIMARY : Intent.NONE}
                         />
                     </Popover2>
 
