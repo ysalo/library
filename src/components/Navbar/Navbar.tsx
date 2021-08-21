@@ -21,7 +21,7 @@ import {
     DarkThemeContext,
     ReturnDialogContext,
     SearchContext
-} from "../utils/context";
+} from "../../utils/context";
 import { useHistory } from "react-router-dom";
 import HelpDrawer from "./HelpDrawer";
 
