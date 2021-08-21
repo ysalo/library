@@ -4,7 +4,7 @@ import { FocusStyleManager } from "@blueprintjs/core";
 import { useLocalBoolState } from "./hooks/useLocalBoolState";
 import { ApolloClient, InMemoryCache, ApolloProvider, NormalizedCacheObject } from "@apollo/client";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import BooksPage from "./pages/BooksPage";
 import LoansPage from "./pages/LoansPage";
 
