@@ -66,7 +66,10 @@ const columnDefs: ColDef[] = [
     {
         headerName: "Ім'я",
         field: "Member.First_Name",
-        valueGetter: params => `${params.data.Member.Last_Name} ${params.data.Member.First_Name}`
+        valueGetter: params =>
+            `${params.data.Member.Last_Name} ${params.data.Member.First_Name} ${
+                params.data.Member.Middle_Name || ""
+            }`
     },
     {
         colId: "Checkout",

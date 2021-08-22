@@ -89,7 +89,7 @@ export function useGridOptions(
                 animateRows: true,
                 rowSelection: "single",
                 suppressAggFuncInHeader: true,
-                // onFirstDataRendered: e => autoSizeColumns(e),
+                onFirstDataRendered: e => autoSizeColumns(e),
                 immutableData: true,
                 popupParent: document.getElementById("root")!,
                 // getContextMenuItems: getContextMenuItems,

@@ -39,6 +39,7 @@ export const GET_ALL_LOANS = gql`
             Member {
                 First_Name
                 Last_Name
+                Middle_Name
             }
         }
     }
