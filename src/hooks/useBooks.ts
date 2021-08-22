@@ -6,5 +6,6 @@ export function useBooks(): [any[], boolean, ApolloError | undefined] {
         fetchPolicy: "cache-and-network",
         errorPolicy: "all"
     });
+
     return [data ? data.getAllBooks : [], loading, error];
 }

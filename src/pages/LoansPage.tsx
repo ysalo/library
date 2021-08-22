@@ -7,29 +7,34 @@ import "./Grid.scss";
 import { DarkThemeContext, SearchContext } from "src/utils/context";
 
 import { useLoans } from "src/hooks/useLoans";
-import { convertFromEpochTime } from "src/utils/utils";
+import { convertFromEpochTime, isPastDue } from "src/utils/utils";
 
 export default function LoansPage() {
     const [gridOptions, gridApi] = useGridOptions(columnDefs, defaultColumnState);
     const dark = useContext(DarkThemeContext);
     const [search] = useContext(SearchContext);
 
-    const [data, loading] = useLoans();
+    const [loans, loading] = useLoans();
 
     useEffect(() => {
         if (gridOptions) {
             gridOptions.getRowNodeId = (data: { Loan_Id: string }) => data.Loan_Id;
             gridOptions.getRowClass = params => params.data.Loan_Id;
+            gridOptions.getRowStyle = (params: any) => {
+                return isPastDue(params.data.Due, params.data.Returned)
+                    ? { background: "#DB3737", fontWeight: "bold" }
+                    : null;
+            };
         }
     }, [gridOptions]);
 
     useEffect(() => {
         if (gridApi) {
-            if (data) {
-                gridApi.setRowData(data);
+            if (loans) {
+                gridApi.setRowData(loans);
             }
         }
-    }, [data, gridApi]);
+    }, [loans, gridApi]);
 
     useEffect(() => {
         if (gridApi) {
@@ -56,9 +61,13 @@ export default function LoansPage() {
     );
 }
 const columnDefs: ColDef[] = [
-    { colId: "Loan_Id", headerName: "Loan_Id", field: "Loan_Id", hide: true },
-    { colId: "Barcode", headerName: "Штрих-код", field: "Barcode" },
-    { colId: "Member_Id", headerName: "ID", field: "Member_Id" },
+    { colId: "Barcode", headerName: "Штрих-код", field: "Barcode", hide: true },
+
+    {
+        headerName: "Ім'я",
+        field: "Member.First_Name",
+        valueGetter: params => `${params.data.Member.Last_Name} ${params.data.Member.First_Name}`
+    },
     {
         colId: "Checkout",
         headerName: "Взято",

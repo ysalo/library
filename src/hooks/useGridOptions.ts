@@ -84,14 +84,6 @@ export function useGridOptions(
                     dateColumn: { filter: "agDateColumnFilter" }
                 },
 
-                // rowClassRules: {
-                //     "alarm-expired": (params) => {
-                //         const expiration = params.data.expiration;
-                //         const active = params.data.active;
-                //         return (!!expiration && Date.now() > expiration) || !active;
-                //     }
-                // },
-
                 allowContextMenuWithControlKey: true,
                 enableBrowserTooltips: true,
                 animateRows: true,

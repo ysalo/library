@@ -33,10 +33,13 @@ export const GET_ALL_LOANS = gql`
         getAllLoans {
             Loan_Id
             Barcode
-            Member_Id
             Checkout
             Due
             Returned
+            Member {
+                First_Name
+                Last_Name
+            }
         }
     }
 `;

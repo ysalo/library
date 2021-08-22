@@ -19,3 +19,6 @@ export const convertFromEpochTime = (epoch: string | null) => {
     }
     return new Date(+epoch).toLocaleDateString();
 };
+
+export const isPastDue = (due: string, returned: string | null) =>
+    new Date() > new Date(+due) && !returned;
