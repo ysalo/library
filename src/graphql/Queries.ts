@@ -41,6 +41,13 @@ export const GET_ALL_LOANS = gql`
                 Last_Name
                 Middle_Name
             }
+            Item {
+                BookToBarcode {
+                    Book {
+                        Title
+                    }
+                }
+            }
         }
     }
 `;

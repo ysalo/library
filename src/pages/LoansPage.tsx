@@ -15,16 +15,10 @@ export default function LoansPage() {
     const [search] = useContext(SearchContext);
 
     const [loans, loading] = useLoans();
-
     useEffect(() => {
         if (gridOptions) {
             gridOptions.getRowNodeId = (data: { Loan_Id: string }) => data.Loan_Id;
             gridOptions.getRowClass = params => params.data.Loan_Id;
-            gridOptions.getRowStyle = (params: any) => {
-                return isPastDue(params.data.Due, params.data.Returned)
-                    ? { background: "#DB3737", fontWeight: "bold" }
-                    : null;
-            };
         }
     }, [gridOptions]);
 
@@ -72,6 +66,22 @@ const columnDefs: ColDef[] = [
             }`
     },
     {
+        colId: "Title",
+        headerName: "Книга",
+        field: "Title",
+        valueGetter: params => params.data.Item.BookToBarcode[0].Book.Title
+    },
+    {
+        colId: "Returned",
+        headerName: "Повернуто",
+        field: "Returned",
+        cellStyle: params =>
+            isPastDue(params.data.Due, params.data.Returned)
+                ? { background: "rgba(253, 57, 57, 0.5)", fontWeight: "bold" }
+                : null,
+        valueGetter: params => convertFromEpochTime(params.data.Returned)
+    },
+    {
         colId: "Checkout",
         headerName: "Взято",
         field: "Checkout",
@@ -81,13 +91,7 @@ const columnDefs: ColDef[] = [
         colId: "Due",
         headerName: "Повернути До",
         field: "Due",
-        valueGetter: params => convertFromEpochTime(params.data.Due)
-    },
-    {
-        colId: "Returned",
-        headerName: "Повернуто",
-        field: "Returned",
-        valueGetter: params => convertFromEpochTime(params.data.Returned),
+        valueGetter: params => convertFromEpochTime(params.data.Due),
         flex: 1
     }
 ];
@@ -115,6 +119,10 @@ export const defaultColumnState: ColumnState[] = [
     },
     {
         colId: "Returned",
+        hide: false
+    },
+    {
+        colId: "Title",
         hide: false
     }
 ];
