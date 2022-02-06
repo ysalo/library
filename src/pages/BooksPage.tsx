@@ -82,6 +82,12 @@ const columnDefs: ColDef[] = [
         field: "Title"
     },
     {
+        colId: "Author",
+        headerName: "Автор",
+        field: "Language",
+        valueGetter: params => getAuthor(params.data)
+    },
+    {
         colId: "Language",
         headerName: "Мова",
         field: "Language",
@@ -105,7 +111,8 @@ export const defaultColumnState: ColumnState[] = [
     { colId: "Title", hide: false },
     { colId: "ISBN", hide: false },
     { colId: "Publication_Year", hide: false },
-    { colId: "Language", hide: false }
+    { colId: "Language", hide: false },
+    { colId: "Author", hide: false }
 ];
 
 const formatLanguageField = (language: string) => {
@@ -124,4 +131,20 @@ const formatLanguageField = (language: string) => {
 const formatPublicationYearField = (year: number) => {
     if (year === 0) return null;
     return year;
+};
+
+//todo: clean this up
+const getAuthor = (data: any) => {
+    const authoredBy = data.BookAuthoredBy;
+    console.log(authoredBy);
+    if (authoredBy) {
+        if (authoredBy.length === 0) {
+            return "";
+        } else {
+            const author = authoredBy[0].Author;
+            return `${author.First_Name} ${author.Last_Name}`;
+        }
+    } else {
+        return "";
+    }
 };
