@@ -24,6 +24,12 @@ export const GET_ALL_BOOKS = gql`
             Publication_Year
             Series_Id
             In_Series_Number
+            BookAuthoredBy {
+                Author {
+                    First_Name
+                    Last_Name
+                }
+            }
         }
     }
 `;
