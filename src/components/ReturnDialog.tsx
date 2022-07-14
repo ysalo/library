@@ -47,10 +47,11 @@ export default function ReturnDialog() {
             ]
         })
             .then(res => {
+                // Дата повернення: ${convertFromEpochTime(
+                //     res.data.returnLoan.Due
+                // )
                 ReturnLoanToaster.show({
-                    message: `Успішно поверна книга. Дата повернення: ${convertFromEpochTime(
-                        res.data.returnLoan.Due
-                    )}`,
+                    message: `Успішно поверна книга`,
                     intent: Intent.SUCCESS,
                     timeout: toastTimeoutMS
                 });

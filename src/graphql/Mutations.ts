@@ -22,7 +22,7 @@ export const CREATE_MEMBER = gql`
 `;
 
 export const CREATE_LOAN = gql`
-    mutation($Member_Id: Int!, $Barcode: String!) {
+    mutation($Member_Id: Float!, $Barcode: String!) {
         createLoan(Member_Id: $Member_Id, Barcode: $Barcode) {
             Due
         }
@@ -31,9 +31,6 @@ export const CREATE_LOAN = gql`
 
 export const RETURN_LOAN = gql`
     mutation($Barcode: String!) {
-        returnLoan(Barcode: $Barcode) {
-            Barcode
-            Due
-        }
+        returnLoan(Barcode: $Barcode)
     }
 `;
