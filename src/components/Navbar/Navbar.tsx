@@ -45,7 +45,7 @@ export default function NavBar({ toggleTheme }: Props) {
                     <NavbarDivider />
                     <Popover2
                         minimal
-                        interactionKind={"hover"}
+                        interactionKind={"click"}
                         position="bottom-left"
                         content={
                             <Menu>
@@ -72,6 +72,7 @@ export default function NavBar({ toggleTheme }: Props) {
                             </Menu>
                         }
                     >
+
                         <Icon
                             className={Classes.MINIMAL}
                             icon="book"
@@ -81,7 +82,7 @@ export default function NavBar({ toggleTheme }: Props) {
                     <NavbarDivider />
                     <Popover2
                         minimal
-                        interactionKind={"hover"}
+                        interactionKind={"click"}
                         position="bottom-left"
                         content={
                             <Menu>
@@ -115,7 +116,7 @@ export default function NavBar({ toggleTheme }: Props) {
 
                     <Popover2
                         minimal
-                        interactionKind={"hover"}
+                        interactionKind={"click"}
                         position="bottom-left"
                         content={
                             <Menu>

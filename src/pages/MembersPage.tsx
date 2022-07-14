@@ -57,7 +57,9 @@ const columnDefs: ColDef[] = [
     { colId: "First_Name", headerName: "Ім'я", field: "First_Name" },
     { colId: "Last_Name", headerName: "Прізвище", field: "Last_Name" },
     { colId: "Middle_Name", headerName: "По Батькові", field: "Middle_Name" },
-    { colId: "Phone_Number", headerName: "Номер Телефону", field: "Phone_Number" },
+    { colId: "Phone_Number", headerName: "Номер Телефону", field: "Phone_Number", valueFormatter: (p) => {
+        console.log(p.value)
+        return normalize(p.value)} },
     { colId: "Email", headerName: "Імейл", field: "Email", flex: 1 }
 ];
 
@@ -83,3 +85,11 @@ export const defaultColumnState: ColumnState[] = [
         hide: false
     }
 ];
+
+const  normalize = (phone:string | null) =>  {
+    if(!phone) {
+        return "";
+    }
+    return phone.replace(/\D+/g, '')
+    .replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+}
