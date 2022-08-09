@@ -33,8 +33,8 @@ export default function AddMemberDialog() {
                 First_Name: firstName,
                 Last_Name: lastName,
                 Middle_Name: middleName,
-                Email: email !== "" ? email : null,
-                Phone_Number: phoneNumber !== "" ? phoneNumber : null
+                Email: email,
+                Phone_Number: phoneNumber
             },
             refetchQueries: [
                 {
