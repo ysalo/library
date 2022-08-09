@@ -39,7 +39,9 @@ export default function CheckOutDialog() {
             member = members.find(m => m.Email === email);
         }
         if (phoneNumber) {
-            member = members.find(m => m.Phone_Number === phoneNumber);
+            const cleaned = phoneNumber.replace(/[^+\d]+/g, "");
+            console.log("cleaned: ", cleaned)
+            member = members.find(m => m.Phone_Number === cleaned);
         }
         if (!member) {
             AddLoanToaster.show({

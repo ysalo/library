@@ -34,7 +34,7 @@ export default function AddMemberDialog() {
                 Last_Name: lastName,
                 Middle_Name: middleName,
                 Email: email,
-                Phone_Number: phoneNumber
+                Phone_Number: phoneNumber.replace(/[^+\d]+/g, "")
             },
             refetchQueries: [
                 {
