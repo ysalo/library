@@ -7,7 +7,8 @@ import "./Grid.scss";
 import { DarkThemeContext, SearchContext } from "src/utils/context";
 
 import { useLoans } from "src/hooks/useLoans";
-import { convertFromEpochTime, isPastDue } from "src/utils/utils";
+import { convertFromEpochTime, dateComparator, isPastDue } from "src/utils/utils";
+import { compareAsc } from "date-fns";
 
 export default function LoansPage() {
     const [gridOptions, gridApi] = useGridOptions(columnDefs, defaultColumnState);
@@ -79,19 +80,31 @@ const columnDefs: ColDef[] = [
             isPastDue(params.data.Due, params.data.Returned)
                 ? { background: "rgba(253, 57, 57, 0.5)", fontWeight: "bold" }
                 : null,
-        valueGetter: params => convertFromEpochTime(params.data.Returned)
+        valueGetter: params => convertFromEpochTime(params.data.Returned),
+        // comparator: (d1:string, d2:string) => {
+        //     return dateComparator(d1, d2)
+        // }
+        //valueFormatter: params => convertFromEpochTime(params.data.Returned),
+
     },
     {
         colId: "Checkout",
         headerName: "Взято",
         field: "Checkout",
-        valueGetter: params => convertFromEpochTime(params.data.Checkout)
+        //TODO: fix date comparators
+        valueGetter: params => convertFromEpochTime(params.data.Checkout),
+        comparator: (d1:string, d2:string) => {
+            return dateComparator(d1, d2)
+        }
     },
     {
         colId: "Due",
         headerName: "Повернути До",
         field: "Due",
         valueGetter: params => convertFromEpochTime(params.data.Due),
+        comparator: (d1:string, d2:string) => {
+            return dateComparator(d1, d2)
+        },
         flex: 1
     }
 ];

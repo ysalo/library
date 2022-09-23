@@ -1,3 +1,5 @@
+import { compareAsc } from "date-fns";
+
 export const validatePhoneNumber = (phoneNumber: string) => {
     const re = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/;
     return re.test(phoneNumber);
@@ -13,12 +15,30 @@ export const validateBarcode = (barcode: string) => {
     return re.test(barcode) && barcode.length === 8;
 };
 
-export const convertFromEpochTime = (epoch: string | null) => {
+export const convertFromEpochTime = (epoch: string | null): string => {
     if (!epoch) {
-        return null;
+        return "";
     }
     return new Date(+epoch).toLocaleDateString();
 };
 
 export const isPastDue = (due: string, returned: string | null) =>
     new Date() > new Date(+due) && !returned;
+
+
+export const dateComparator = (d1: string | null, d2: string | null) => {
+
+    if(d1 === null && d2 === null) {
+        return 0;
+    } 
+    if(d1 === null) {
+        return -1;
+    }
+    if(d2 === null) {
+        return 1;
+    }
+    const p1 = d1.split("/");
+    const p2 = d2.split("/");
+    return compareAsc(new Date(+p1[2], +p1[0], +p1[1]),new Date(+p2[2], +p2[0], +p2[1]) );
+    
+}
