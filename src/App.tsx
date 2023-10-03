@@ -24,6 +24,7 @@ import ReturnDialog from "./components/ReturnDialog";
 FocusStyleManager.onlyShowFocusOnTabs();
 
 export default function App() {
+    console.log("hi from liz");
     const [dark, setDark] = useLocalBoolState("dark-mode", true);
     const [client] = useState<ApolloClient<NormalizedCacheObject>>(
         new ApolloClient({
